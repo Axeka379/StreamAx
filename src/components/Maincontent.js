@@ -10,7 +10,11 @@ function Maincontent() {
 
   useEffect(() => {
     (async () => {
+<<<<<<< HEAD
       const result = await fetch("https://jstrands.ddns.net:4000");
+=======
+      const result = await fetch("https://757adc29.ngrok.io/");
+>>>>>>> adding some login components
       const json = await result.json();
       console.log(json);
       console.log(await result);
