@@ -10,7 +10,7 @@ function Maincontent() {
 
   useEffect(() => {
     (async () => {
-      const result = await fetch("http://localhost:4000");
+      const result = await fetch("https://jstrands.ddns.net:4000");
       const json = await result.json();
       console.log(json);
       console.log(await result)
@@ -25,7 +25,7 @@ function Maincontent() {
         <p className="">{serverMessage.message}</p>
 
         <Search
-          placeholder="write something"
+          placeholder="Type something"
           onSearch={(value) =>
             (document.querySelector(
               "#search"
@@ -34,7 +34,7 @@ function Maincontent() {
           style={{ width: 400 }}
         />
         <div className="textContent">
-          <span style={{ display: "inline" }}>StrandBurst är </span>
+          <span style={{ display: "inline" }}>SimQn är </span>
           <span className="ani" id="search"></span>
         </div>
       </div>

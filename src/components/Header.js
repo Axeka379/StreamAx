@@ -21,16 +21,16 @@ return (
             mode="horizontal"
           >
             <Menu.Item key="siteName">
-              <Title style={{ marginBottom: "5px", color: "rgb(255,255,255)" }}>
-                StreamAx
+              <Title style={{ marginBottom: "5px", color: "rgb(100 255 10)" }}>
+                StreamJs
               </Title>
             </Menu.Item>
-            <Menu.Item key=""> StrandBurst är noob</Menu.Item>
+            <Menu.Item key=""> SimQn är noob</Menu.Item>
 
             <SubMenu title={<> Drop</>}>
               <Menu.ItemGroup title="Item 1">
                 <Menu.Item key="setting:1">Blörp</Menu.Item>
-                <Menu.Item key="setting:2">Blörp</Menu.Item>
+                <Menu.Item key="setting:2">SimQn</Menu.Item>
               </Menu.ItemGroup>
               <Menu.ItemGroup title="Item 2">
                 <Menu.Item key="setting:3">Blörp</Menu.Item>
