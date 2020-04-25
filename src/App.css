@@ -1,3 +1,5 @@
+@import "~antd/dist/antd.css";
+
 .App {
   text-align: center;
 }
@@ -13,19 +15,33 @@
   }
 }
 
-.App-header {
+body {
   background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+
   font-size: calc(10px + 2vmin);
   color: white;
 }
 
+.centerContent {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.centerContentFlex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Roboto", sans-serif;
+}
+
+.textContent {
+  width: 400px;
+  text-align: left;
+  margin-top: 40px;
+}
 .App-link {
-  color: #61dafb;
+  color: #133944;
 }
 
 @keyframes App-logo-spin {
@@ -34,5 +50,22 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+a {
+  color: white;
+}
+
+.ani {
+  animation: animationText infinite 2s linear;
+}
+
+@keyframes animationText {
+  from {
+    color: rgb(255, 255, 255);
+  }
+  to {
+    color: rgb(204, 50, 50);
   }
 }

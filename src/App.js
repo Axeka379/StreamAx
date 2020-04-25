@@ -2,7 +2,12 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { useState, useEffect } from "react";
+import { Menu, Input } from "antd";
+import { Typography, Divider } from "antd";
 
+const { Title, Paragraph, Text } = Typography;
+const { SubMenu } = Menu;
+const { Search } = Input;
 function App() {
   const [serverMessage, setMessage] = useState({ message: "Loading" });
 
@@ -19,19 +24,63 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-          <p>{serverMessage.message}</p>
-        </a>
+        <div className="siteContent">
+          <Menu
+            style={{
+              backgroundColor: "#132744",
+              color: "white",
+              minWidth: "1500px",
+            }}
+            mode="horizontal"
+          >
+            <Menu.Item key="siteName">
+              <Title style={{ marginBottom: "5px", color: "rgb(255,255,255)" }}>
+                StreamAx
+              </Title>
+            </Menu.Item>
+            <Menu.Item key=""> StrandBurst är noob</Menu.Item>
+
+            <SubMenu title={<> Drop</>}>
+              <Menu.ItemGroup title="Item 1">
+                <Menu.Item key="setting:1">Blörp</Menu.Item>
+                <Menu.Item key="setting:2">Blörp</Menu.Item>
+              </Menu.ItemGroup>
+              <Menu.ItemGroup title="Item 2">
+                <Menu.Item key="setting:3">Blörp</Menu.Item>
+                <Menu.Item key="setting:4">Blörp</Menu.Item>
+              </Menu.ItemGroup>
+            </SubMenu>
+            <Menu.Item key="alipay">
+              <a
+                href="/"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "white" }}
+              >
+                href
+              </a>
+            </Menu.Item>
+          </Menu>
+          <div className="centerContentFlex">
+            <img src={logo} className="App-logo" alt="logo" />
+
+            <p className="">{serverMessage.message}</p>
+
+            <Search
+              placeholder="write something"
+              onSearch={(value) =>
+                (document.querySelector(
+                  "#search"
+                ).innerText = `${value.toUpperCase()}`)
+              }
+              style={{ width: 400 }}
+            />
+            <div className="textContent">
+              <span style={{ display: "inline" }}>StrandBurst är </span>
+              <span className="ani" id="search"></span>
+            </div>
+          </div>
+        </div>
       </header>
     </div>
   );
