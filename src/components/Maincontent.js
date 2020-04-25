@@ -1,19 +1,19 @@
-import React from "react"
+import React from "react";
 import logo from "./logo.svg";
 import { useState, useEffect } from "react";
 import { Input } from "antd";
+import LoginForm from "./LoginForm";
 
 function Maincontent() {
-
   const [serverMessage, setMessage] = useState({ message: "Loading" });
   const { Search } = Input;
 
   useEffect(() => {
     (async () => {
-      const result = await fetch("http://localhost:4000");
+      const result = await fetch("https://757adc29.ngrok.io/");
       const json = await result.json();
       console.log(json);
-      console.log(await result)
+      console.log(await result);
       setMessage(json);
     })();
   }, []);
@@ -36,10 +36,10 @@ function Maincontent() {
         <div className="textContent">
           <span style={{ display: "inline" }}>StrandBurst är </span>
           <span className="ani" id="search"></span>
+          <LoginForm />
         </div>
       </div>
     </main>
-  )
-
+  );
 }
-export default Maincontent
+export default Maincontent;
