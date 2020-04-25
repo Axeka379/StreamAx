@@ -4,11 +4,11 @@ const app = express();
 const morgan = require("morgan");
 const cors = require("cors");
 const fs = require('fs');
-const privateKey = fs.readFileSync('../.cert/key.pem', 'utf8');
-const certificate = fs.readFileSync('../.cert/cert.pem', 'utf8');
-const https = require('https');
+//const privateKey = fs.readFileSync('../.cert/key.pem', 'utf8');
+//const certificate = fs.readFileSync('../.cert/cert.pem', 'utf8');
+//const https = require('https');
 
-const credentials = {key: privateKey, cert: certificate};
+//const credentials = {key: privateKey, cert: certificate};
 
 app.use(morgan("dev"));
 app.use(cors());
@@ -30,4 +30,6 @@ app.use((err, req, res, next) => {
   res.json({ message: err.message || "Internal Server Error" });
 });
 
-https.createServer(credentials, app).listen(4000)
+app.listen(process.env.PORT ? process.env.PORT : 4000, () =>
+  console.log(`Listening on port ${process.env.PORT ? process.env.PORT : 4000}!`)
+);
