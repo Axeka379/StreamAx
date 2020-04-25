@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { Component } from "react";
 import { Form, Input, Button, Checkbox } from "antd";
 import Cookies from "js-cookie";
@@ -50,6 +51,10 @@ const redirectToLogin = () => {
   window.location.replace(`localhost:443`);
   // or history.push('/login') if your Login page is inside the same app
 };
+=======
+import React from "react";
+import { Form, Input, Button, Checkbox } from "antd";
+>>>>>>> 17a6c09b546d0df879dac11e623daf256051a050
 
 const layout = {
   labelCol: { span: 8 },
@@ -60,6 +65,7 @@ const tailLayout = {
 };
 
 const LoginForm = () => {
+<<<<<<< HEAD
   const onFinish = async (values) => {
     console.log("Success:", values);
     const result = await fetch("http://localhost:4000", {
@@ -83,6 +89,10 @@ const LoginForm = () => {
     }
 
     //
+=======
+  const onFinish = (values) => {
+    console.log("Success:", values);
+>>>>>>> 17a6c09b546d0df879dac11e623daf256051a050
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -90,18 +100,26 @@ const LoginForm = () => {
   };
 
   return (
+<<<<<<< HEAD
     <div style={{ marginTop: "00px" }}>
       <span
         style={{ color: "red", height: "80px", margin: 0 }}
         id="loginMessage"
       ></span>
+=======
+    <div>
+>>>>>>> 17a6c09b546d0df879dac11e623daf256051a050
       <Form
         {...layout}
         name="basic"
         initialValues={{ remember: true }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
+<<<<<<< HEAD
         style={{ marginTop: "0" }}
+=======
+        style={{ marginTop: "50px" }}
+>>>>>>> 17a6c09b546d0df879dac11e623daf256051a050
         color="#999"
         labelCol="white"
       >

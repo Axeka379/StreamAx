@@ -4,7 +4,6 @@ import Header from "./components/Header";
 import Maincontent from "./components/Maincontent";
 import "./App.css";
 
-
 const defaultGlobalState = {
   num: 0,
   text: "foo",
