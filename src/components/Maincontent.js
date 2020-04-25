@@ -1,45 +1,73 @@
-import React from "react"
+import React from "react";
 import logo from "./logo.svg";
 import { useState, useEffect } from "react";
-import { Input } from "antd";
+import { Input, Button } from "antd";
+import LoginForm from "./LoginForm";
+import Cookies from "js-cookie";
 
 function Maincontent() {
-
   const [serverMessage, setMessage] = useState({ message: "Loading" });
   const { Search } = Input;
 
   useEffect(() => {
     (async () => {
-      const result = await fetch("https://jstrands.ddns.net:4000");
-      const json = await result.json();
-      console.log(json);
-      console.log(await result)
-      setMessage(json);
+      //const result = await fetch("https://jstrands.ddns.net:4000");
+
+      if (Cookies.get("access_token")) {
+        console.log("authed");
+        var bearer = "Bearer " + Cookies.get("access_token");
+        const result = await fetch("http://localhost:4000", {
+          headers: {
+            Authorization: bearer,
+          },
+        });
+        const json = await result.json();
+
+        setMessage(json);
+      } else {
+        setMessage({ message: "Login to access content" });
+      }
     })();
   }, []);
-  return (
-    <main>
-      <div className="centerContentFlex">
-        <img src={logo} className="App-logo" alt="logo" />
 
-        <p className="">{serverMessage.message}</p>
+  if (Cookies.get("access_token")) {
+    return (
+      <main>
+        <div className="centerContentFlex">
+          <img src={logo} className="App-logo" alt="logo" />
 
-        <Search
-          placeholder="Type something"
-          onSearch={(value) =>
-            (document.querySelector(
-              "#search"
-            ).innerText = `${value.toUpperCase()}`)
-          }
-          style={{ width: 400 }}
-        />
-        <div className="textContent">
-          <span style={{ display: "inline" }}>SimQn är </span>
-          <span className="ani" id="search"></span>
+          <p className="">{serverMessage.message}</p>
+
+          <Search
+            placeholder="Type something"
+            onSearch={(value) =>
+              (document.querySelector(
+                "#search"
+              ).innerText = `${value.toUpperCase()}`)
+            }
+            style={{ width: 400 }}
+          />
+          <div className="textContent">
+            <span style={{ display: "inline" }}>SimQn är </span>
+            <span className="ani" id="search"></span>
+          </div>
         </div>
-      </div>
-    </main>
-  )
+      </main>
+    );
+  } else {
+    return (
+      <main>
+        <div style={{ marginTop: "70px" }}>
+          <div className="centerContentFlex">
+            <p className="">{serverMessage.message}</p>
 
+            <div className="textContent">
+              <LoginForm />
+            </div>
+          </div>
+        </div>
+      </main>
+    );
+  }
 }
-export default Maincontent
+export default Maincontent;

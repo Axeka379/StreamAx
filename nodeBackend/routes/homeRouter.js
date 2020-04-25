@@ -3,12 +3,11 @@
 const express = require('express')
 const router = express.Router()
 const controller = require('../controllers/homeController')
+const jwtHandler = require('../authorization/jwtHandler')
 
 // Routes for home
 router.route('/')
-  .get(controller.getStart)
-  .all((req, res, next) => req.method === 'OPTIONS' // catches not supported methods
-    ? res.header('Allow', 'GET, OPTIONS').status(200).json({ supportedMethods: 'GET, OPTIONS' })
-    : res.header('Allow', 'GET, OPTIONS').status(405).json({ message: 'Method not allowed' }))
-
+  .get(jwtHandler.jwtAuth, controller.getStart)
+  .post(controller.loginPost)
+  
 module.exports = router
