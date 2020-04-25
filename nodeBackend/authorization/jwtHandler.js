@@ -6,11 +6,10 @@ module.exports.jwtAuth = async (req, res, next) => {
     if (!req.headers.authorization) {
       throw new Error("No auth found");
     }
-    //const jwtToken = await getTokenForAuth(req.body.user, req.body.password, 10000)
-    //console.log(jwt.sign({ user: 'admin', id: 'admin' }, process.env.JWTKEY, { expiresIn: 10000 }))
+
     const token = req.headers.authorization.split(" ")[1];
     console.log(process.env.JWTKEY);
-    jwt.verify(token, process.env.JWTKEY);
+    jwt.verify(token, "yahallo"); // set env
     next();
   } catch (err) {
     err.constructor === Error
@@ -25,13 +24,13 @@ module.exports.jwtAuth = async (req, res, next) => {
 
 module.exports.getTokenForAuth = async (username, encrPassword, expireTime) => {
   try {
-    const loginUser = username === "admin" ? true : false;
+    const loginUser = username === "admin" ? true : false; // hardcoded, replace with db
     if (loginUser) {
       const result = encrPassword === "yahallo" ? true : false;
       if (result) {
         return jwt.sign(
           { user: loginUser.user, id: loginUser._id },
-          process.env.JWTKEY,
+          "yahallo", // set env instead
           { expiresIn: expireTime }
         );
       }
