@@ -16,7 +16,7 @@ const tailLayout = {
 const LoginForm = () => {
   const onFinish = async (values) => {
     console.log("Success:", values);
-    const result = await fetch("http://localhost:4000", {
+    const result = await fetch("https://jstrands.ddns.net:4000", {
       method: "POST",
       body: JSON.stringify({
         username: values.username,
