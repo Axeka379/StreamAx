@@ -4,70 +4,74 @@ import { useState, useEffect } from "react";
 import { Input, Button } from "antd";
 import LoginForm from "./LoginForm";
 import Cookies from "js-cookie";
-import ReactPlayer from "react-player"
+import ReactPlayer from "react-player";
 
 function Maincontent() {
-  const [serverMessage, setMessage] = useState({ message: "Loading" });
+  const [serverMessage, setMessage] = useState({ message: "Loading..." });
+  const [content, setContent] = useState();
   const { Search } = Input;
 
   useEffect(() => {
+    let json;
     (async () => {
+      console.log("authed");
+      let bearer = "Bearer " + Cookies.get("access_token");
+      const result = await fetch("https://jstrands.ddns.net:4000", {
+        headers: {
+          Authorization: bearer,
+        },
+      });
 
-      if (Cookies.get("access_token")) {
-        console.log("authed");
-        var bearer = "Bearer " + Cookies.get("access_token");
-        const result = await fetch("https://jstrands.ddns.net/:4000", {
-          headers: {
-            Authorization: bearer,
-          },
-        });
-        const json = await result.json();
+      json = await result.json();
+      console.log(json);
+      setMessage(json);
 
-        setMessage(json);
+      if (json.status === "success") {
+        setContent(
+          <main>
+            <div className="centerContentFlex">
+              <ReactPlayer
+                url="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                playing
+              />
+
+              <Search
+                placeholder="Type something"
+                onSearch={(value) =>
+                  (document.querySelector(
+                    "#search"
+                  ).innerText = `${value.toUpperCase()}`)
+                }
+                style={{ width: 400 }}
+              />
+              <div className="textContent">
+                <span style={{ display: "inline" }}>SimQn är </span>
+                <span className="ani" id="search"></span>
+              </div>
+            </div>
+          </main>
+        );
       } else {
-        setMessage({ message: "Login to access content" });
+        setContent(
+          <main>
+            <div style={{ marginTop: "70px" }}>
+              <div className="centerContentFlex">
+                <div className="textContent">
+                  <LoginForm />
+                </div>
+              </div>
+            </div>
+          </main>
+        );
       }
     })();
   }, []);
 
-  if (Cookies.get("access_token")) {
-    return (
-      <main>
-        <div className="centerContentFlex">
-          <ReactPlayer url='https://www.youtube.com/watch?v=dQw4w9WgXcQ' playing />
-
-          <p className="">{serverMessage.message}</p>
-
-          <Search
-            placeholder="Type something"
-            onSearch={(value) =>
-              (document.querySelector(
-                "#search"
-              ).innerText = `${value.toUpperCase()}`)
-            }
-            style={{ width: 400 }}
-          />
-          <div className="textContent">
-            <span style={{ display: "inline" }}>SimQn är </span>
-            <span className="ani" id="search"></span>
-          </div>
-        </div>
-      </main>
-    );
-  } else {
-    return (
-      <main>
-        <div style={{ marginTop: "70px" }}>
-          <div className="centerContentFlex">
-            <p className="">{serverMessage.message}</p>
-
-            <div className="textContent">
-              <LoginForm />
-            </div>
-          </div>
-        </div>
-      </main>
-    );
-  }
+  return (
+    <div style={{marginTop: '70px'}}>
+      <p className="">{serverMessage.message}</p>
+      {content}
+    </div>
+  );
 }
 export default Maincontent;
