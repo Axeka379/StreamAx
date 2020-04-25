@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Input, Button } from "antd";
 import LoginForm from "./LoginForm";
 import Cookies from "js-cookie";
+import ReactPlayer from "react-player"
 
 function Maincontent() {
   const [serverMessage, setMessage] = useState({ message: "Loading" });
@@ -11,12 +12,11 @@ function Maincontent() {
 
   useEffect(() => {
     (async () => {
-      //const result = await fetch("https://jstrands.ddns.net:4000");
 
       if (Cookies.get("access_token")) {
         console.log("authed");
         var bearer = "Bearer " + Cookies.get("access_token");
-        const result = await fetch("http://localhost:4000", {
+        const result = await fetch("https://jstrands.ddns.net/:4000", {
           headers: {
             Authorization: bearer,
           },
@@ -34,7 +34,7 @@ function Maincontent() {
     return (
       <main>
         <div className="centerContentFlex">
-          <img src={logo} className="App-logo" alt="logo" />
+          <ReactPlayer url='https://www.youtube.com/watch?v=dQw4w9WgXcQ' playing />
 
           <p className="">{serverMessage.message}</p>
 
