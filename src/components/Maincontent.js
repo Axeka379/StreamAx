@@ -1,10 +1,10 @@
-import React from "react"
+import React from "react";
 import logo from "./logo.svg";
 import { useState, useEffect } from "react";
 import { Input } from "antd";
+import LoginForm from "./LoginForm";
 
 function Maincontent() {
-
   const [serverMessage, setMessage] = useState({ message: "Loading" });
   const { Search } = Input;
 
@@ -13,7 +13,7 @@ function Maincontent() {
       const result = await fetch("https://jstrands.ddns.net:4000");
       const json = await result.json();
       console.log(json);
-      console.log(await result)
+      console.log(await result);
       setMessage(json);
     })();
   }, []);
@@ -36,10 +36,10 @@ function Maincontent() {
         <div className="textContent">
           <span style={{ display: "inline" }}>SimQn är </span>
           <span className="ani" id="search"></span>
+          <LoginForm />
         </div>
       </div>
     </main>
-  )
-
+  );
 }
-export default Maincontent
+export default Maincontent;
