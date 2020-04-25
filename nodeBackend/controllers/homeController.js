@@ -5,6 +5,7 @@ const startController = {};
 startController.getStart = async (req, res, next) => {
   try {
     res.status(200).json({
+      status: "success",
       message: "YAHALLO fetched from server",
     });
   } catch (err) {
@@ -16,7 +17,7 @@ startController.getStart = async (req, res, next) => {
 
 startController.loginPost = async (req, res, next) => {
   try {
-    console.log(req.body)
+    console.log(req.body);
     const jwtToken = await jwtHandler.getTokenForAuth(
       req.body.username,
       req.body.password,
@@ -25,8 +26,7 @@ startController.loginPost = async (req, res, next) => {
 
     if (jwtToken) {
       res.status(200).json({
-        message:
-          "Accepted",
+        message: "Accepted",
         APIToken: jwtToken,
       });
     } else {
