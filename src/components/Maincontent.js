@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "./logo.svg";
 import { useState, useEffect } from "react";
 import { Input, Button } from "antd";
 import LoginForm from "./LoginForm";
@@ -16,7 +15,7 @@ function Maincontent() {
     (async () => {
       console.log("authed");
       let bearer = "Bearer " + Cookies.get("access_token");
-      const result = await fetch("http://localhost:4000", {
+      const result = await fetch("https://jstrands.ddns.net:4000", {
         headers: {
           Authorization: bearer,
         },
@@ -31,11 +30,10 @@ function Maincontent() {
           <main>
             <div className="centerContentFlex">
               <ReactPlayer
-                url="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-                playing
+                url="https://jstrands.ddns.net:4000/vid.mp4"
+                playing controls
               />
-              <video width={600}><source src="http://localhost:4000/videos"></source></video>
-              <p>nedgfrvnk</p>
+             
               <Search
                 placeholder="Type something"
                 onSearch={(value) =>

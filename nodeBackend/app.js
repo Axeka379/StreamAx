@@ -4,6 +4,7 @@ const app = express();
 const morgan = require("morgan");
 const cors = require("cors");
 const fs = require("fs");
+const jwtHandler = require('./authorization/jwtHandler')
 
 const https = require("https");
 
@@ -14,8 +15,9 @@ app.use(express.json());
 
 // routes
 app.use("/", require("./routes/homeRouter"));
-app.use("/videos", require("./routes/videosRouter"))
-
+//app.use("/videos", require("./routes/videosRouter"))
+//app.use(jwtHandler.jwtAuth, express.static('../../'));
+app.use(express.static('../../'))
 // Uncaught 404's
 app.use((req, res, next) => {
   res.status(404);

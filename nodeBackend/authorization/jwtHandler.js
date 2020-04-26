@@ -17,7 +17,7 @@ module.exports.jwtAuth = async (req, res, next) => {
           message: "Forbidden, you need a valid API-token use this resource",
         })
       : res.status(401).json({
-          message: 'Please login with valid credentials '
+          message: 'ENTER THY CREDENTIALS, HUMANOID'
         });
   }
 };
