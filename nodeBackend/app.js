@@ -14,6 +14,7 @@ app.use(express.json());
 
 // routes
 app.use("/", require("./routes/homeRouter"));
+app.use("/videos", require("./routes/videosRouter"))
 
 // Uncaught 404's
 app.use((req, res, next) => {
