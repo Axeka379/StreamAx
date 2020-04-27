@@ -4,7 +4,7 @@ const videoController = {};
 
 videoController.getVideos = async (req, res, next) => {
   console.log("get video");
-  const path = __dirname + "/../videos/stor.MP4"; // add own file
+  const path = __dirname + "/../../../vid3.mp4"; // add own file
   const stat = fs.statSync(path);
   const fileSize = stat.size;
   const range = req.headers.range;
