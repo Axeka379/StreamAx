@@ -30,7 +30,7 @@ function Maincontent() {
           <main>
             <div className="centerContentFlex">
               <ReactPlayer
-                url="https://jstrands.ddns.net:4000/vid.mp4"
+                url="https://jstrands.ddns.net:4000/videos"
                 playing controls
               />
              
