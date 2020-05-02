@@ -4,6 +4,7 @@ import { Input, Button } from "antd";
 import LoginForm from "./LoginForm";
 import Cookies from "js-cookie";
 import ReactPlayer from "react-player";
+import ReactHLS from 'react-hls-player';
 
 function Maincontent() {
   const [serverMessage, setMessage] = useState({ message: "Loading..." });
@@ -30,10 +31,12 @@ function Maincontent() {
           <main>
             <div className="centerContentFlex">
               <ReactPlayer
-                url="https://jstrands.ddns.net:4000/videos"
+                //url="https://jstrands.ddns.net:4000/videos"
+                url="https://jstrands.ddns.net:5000/live/keymaster/index.m3u8"
+                
                 playing controls
               />
-             
+            
               <Search
                 placeholder="Type something"
                 onSearch={(value) =>

@@ -8,8 +8,10 @@
     "@testing-library/user-event": "^7.1.2",
     "antd": "^4.1.4",
     "js-cookie": "^2.2.1",
+    "node-media-server": "^2.1.8",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-hls-player": "0.0.5",
     "react-player": "^1.15.3",
     "react-scripts": "3.4.1"
   },
