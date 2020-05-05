@@ -7,6 +7,7 @@ const fs = require("fs");
 const jwtHandler = require('./authorization/jwtHandler')
 
 const https = require("https");
+const http = require("http");
 
 app.use(morgan("dev"));
 app.use(cors());
@@ -35,6 +36,14 @@ try {
   const certificate = fs.readFileSync("../.cert/cert.pem", "utf8");
   const credentials = { key: privateKey, cert: certificate };
   https.createServer(credentials, app).listen(4000);
+
+  // Redirect from http port 80 to https
+
+  http.createServer(function (req, res) {
+    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+    res.end();
+  }).listen(80);
+
 } catch (error) {
   console.log(error.message)
   app.listen(process.env.PORT ? process.env.PORT : 4000, () =>
