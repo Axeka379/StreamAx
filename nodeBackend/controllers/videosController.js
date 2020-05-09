@@ -4,7 +4,7 @@ const videoController = {};
 
 videoController.getVideos = async (req, res, next) => {
   console.log("get video");
-  const path = __dirname + "/../../../vid3.mp4"; // add own file
+  const path = "/home/nnms/hdd0m/Lager/Cosmos.Possible.Worlds.S01E01.Ladder.to.the.Stars.REPACK.1080p.WEBRip.x264-CAFFEiNE/Cosmos.Possible.Worlds.S01E01.Ladder.to.the.Stars.REPACK.1080p.WEBRip.x264-CAFFEiNE.mkv"; // add own file
   const stat = fs.statSync(path);
   const fileSize = stat.size;
   const range = req.headers.range;
@@ -18,14 +18,14 @@ videoController.getVideos = async (req, res, next) => {
       "Content-Range": `bytes ${start}-${end}/${fileSize}`,
       "Accept-Ranges": "bytes",
       "Content-Length": chunksize,
-      "Content-Type": "video/mp4",
+      "Content-Type": "video/mkv",
     };
     res.writeHead(206, head);
     file.pipe(res);
   } else {
     const head = {
       "Content-Length": fileSize,
-      "Content-Type": "video/mp4",
+      "Content-Type": "video/mkv",
     };
     res.writeHead(200, head);
     fs.createReadStream(path).pipe(res);
