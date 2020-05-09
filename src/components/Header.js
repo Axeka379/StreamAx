@@ -23,7 +23,7 @@ function Header() {
               StreamJs
             </Title>
           </Menu.Item>
-          <Menu.Item key=""> SimQn är noob</Menu.Item>
+          <Menu.Item key=""> Testy texty boi</Menu.Item>
 
           <SubMenu title={<> Drop</>}>
             <Menu.ItemGroup title="Item 1">

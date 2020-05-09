@@ -30,13 +30,15 @@ function Maincontent() {
         setContent(
           <main>
             <div className="centerContentFlex">
-              <ReactPlayer
+          
+              <video src="https://jstrands.ddns.net:4000/videos" type='video/x-matroska; codecs="theora, vorbis"' autoplay controls
+              />
+                <ReactPlayer
                 //url="https://jstrands.ddns.net:4000/videos"
                 url="https://jstrands.ddns.net:5000/live/keymaster/index.m3u8"
                 
                 playing controls
               />
-            
               <Search
                 placeholder="Type something"
                 onSearch={(value) =>
