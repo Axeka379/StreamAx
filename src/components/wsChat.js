@@ -16,14 +16,17 @@ const WsChat = () => {
   webS.onmessage = (event) => {
     let data = JSON.parse(event.data);
 
-    setChatMessage((oldArray) => [...oldArray, <p style={{fontSize: 20}}>{data.message}</p>]);
+    setChatMessage((oldArray) => [
+      ...oldArray,
+      <p style={{ fontSize: 20 }}>{data.message}</p>,
+    ]);
   };
   return (
     <div>
       <div
         style={{
           width: 300,
-          height: 800,
+          height: 600,
           backgroundColor: "rgb(50,50,50)",
           position: "absolute",
           top: 200,
@@ -38,7 +41,8 @@ const WsChat = () => {
       <Search
         placeholder="Type something"
         onSearch={(value) => webS.send(value)}
-        style={{ width: 400 }}
+        enterButton="Meow"
+        style={{ width: 300, position: "absolute", top: 800, right: 400 }}
       />
     </div>
   );
