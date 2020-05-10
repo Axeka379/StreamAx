@@ -4,7 +4,8 @@ import { Input, Button } from "antd";
 import LoginForm from "./LoginForm";
 import Cookies from "js-cookie";
 import ReactPlayer from "react-player";
-import ReactHLS from 'react-hls-player';
+import ReactHLS from "react-hls-player";
+import WsChat from "./wsChat";
 
 function Maincontent() {
   const [serverMessage, setMessage] = useState({ message: "Loading..." });
@@ -30,14 +31,17 @@ function Maincontent() {
         setContent(
           <main>
             <div className="centerContentFlex">
-          
-              <video src="https://jstrands.ddns.net:4000/videos" type='video/x-matroska; codecs="theora, vorbis"' autoplay controls
+              <video
+                src="https://jstrands.ddns.net:4000/videos"
+                type='video/x-matroska; codecs="theora, vorbis"'
+                autoplay
+                controls
               />
-                <ReactPlayer
+              <ReactPlayer
                 //url="https://jstrands.ddns.net:4000/videos"
                 url="https://jstrands.ddns.net:5000/live/keymaster/index.m3u8"
-                
-                playing controls
+                playing
+                controls
               />
               <Search
                 placeholder="Type something"
@@ -53,6 +57,7 @@ function Maincontent() {
                 <span className="ani" id="search"></span>
               </div>
             </div>
+            <WsChat />
           </main>
         );
       } else {
@@ -72,7 +77,7 @@ function Maincontent() {
   }, []);
 
   return (
-    <div style={{marginTop: '70px'}}>
+    <div style={{ marginTop: "70px" }}>
       <p className="">{serverMessage.message}</p>
       {content}
     </div>
