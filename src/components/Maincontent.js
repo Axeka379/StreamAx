@@ -5,21 +5,18 @@ import LoginForm from "./LoginForm";
 import Cookies from "js-cookie";
 import ReactPlayer from "react-player";
 import ReactHLS from 'react-hls-player';
-import VideoPlayer from './VideoPlayer.js'
+import videojs from 'video.js'
+import eme from 'videojs-contrib-eme'
+import "video.js/dist/video-js.css";
+//import VideoPlayer from './VideoPlayer.js'
 //import eme from 'videojs-contrib-eme'
 //import ShakaPlayer from 'shaka-player-react';
 //import player from 'video.js'
-var request = require('request')
-var crypto = require('crypto'),
+//var request = require('request')
+/*var crypto = require('crypto'),
     algorithm = 'aes-256-ctr',
     password = 'rickandmorty';
-const fs = require('fs');  
-
-function toBase64(u8arr) {
-  return btoa(String.fromCharCode.apply(null, u8arr)).
-      replace(/\+/g, '-').replace(/\//g, '_').replace(/=*$/, '');
-}
-
+*/
 function Maincontent() {
   const [serverMessage, setMessage] = useState({ message: "Loading..." });
   const [content, setContent] = useState();
@@ -39,23 +36,18 @@ function Maincontent() {
       json = await result.json();
       console.log(json);
       setMessage(json);
-      var decrypt = crypto.createDecipher(algorithm, password)
+      //var decrypt = crypto.createDecipher(algorithm, password)
       
       //request('https://cloud.comhem.se/opin/io/downloadPublic/jc000114826/25df3bf6963f4468b8d0977a4b7d0aec').pipe(decrypt).pipe(vid);
       //https://cloud.comhem.se/opin/io/downloadPublic/jc000114826/e33bafef3d294eb29c5b14ddd5669195/@e33bafef3d294eb29c5b14ddd5669195
       
       //fetch('https://cloud.comhem.se/opin/io/downloadPublic/jc000114826/25df3bf6963f4468b8d0977a4b7d0aec', {mode: 'no-cors'}, res => res.pipe(decrypt).pipe(fs.createWriteStream(vid.srcObject)));
-      var KEY = new Uint8Array([
-        0xeb, 0xdd, 0x62, 0xf1, 0x68, 0x14, 0xd2, 0x7b,
-        0x68, 0xef, 0x12, 0x2a, 0xfc, 0xe4, 0xae, 0x3c
-      ]);
-      //
+         //
       const videoJsOptions = {
-        id: 'VIDYA',
-        autoplay: true,
+        //id: 'VIDYA',
+        //autoplay: true,
         controls: true,
-        
-        /*sources:[{
+                /*sources:[{
           src: 'https://jstrands.ddns.net:4000/videos',
           type: 'video/mp4'
         }]*/
@@ -66,7 +58,15 @@ function Maincontent() {
         setContent(
           <main>
             <div className="centerContentFlex">
-            <VideoPlayer { ...videoJsOptions }/>
+            <video 
+              crossOrigin="anonymous" 
+              id="videojs-contrib-eme-player" 
+              className="video-js vjs-default-skin" 
+              //type='video/x-matroska; codecs="theora, vorbis"' 
+              controls 
+              data-setup='{"plugins": {"eme": {}}}'>
+            </video>
+            
               <video 
                 //src="https://jstrands.ddns.net:4000/videos"
                 //id="VIDYA"
@@ -85,7 +85,51 @@ function Maincontent() {
           </main>
         );
           
+        const KEY = new Uint8Array([
+         //HIDDEN KEY LOL
+        ]);
   
+        let player = window.player = videojs('videojs-contrib-eme-player');
+  
+        // Convert Uint8Array into base64 using base64url alphabet, without padding.
+        let toBase64 = (u8arr) => {
+          return btoa(String.fromCharCode.apply(null, u8arr)).
+            replace(/\+/g, '-').replace(/\//g, '_').replace(/=*$/, '');
+        }
+  
+        player.src({
+     //          src: 'https://cors-anywhere.herokuapp.com/https://cloud.comhem.se/opin/io/downloadPublic/jc000114826/33fd9512b75540bfa960920b0b4c05eb',
+     // WEBM src: 'https://cors-anywhere.herokuapp.com/https://cloud.comhem.se/opin/io/downloadPublic/jc000114826/02a27676d0e24cad82fd5d1cad7ab395',
+
+          src: 'https://cors-anywhere.herokuapp.com/https://cloud.comhem.se/opin/io/downloadPublic/jc000114826/33fd9512b75540bfa960920b0b4c05eb',
+          type: 'video/mp4',
+      
+          keySystems: {
+            'org.w3.clearkey': {
+              audioContentType: 'audio/webm; codecs="vorbis"',
+          videoContentType: 'video/webm; codecs="vp9"',
+              getLicense: (emeOptions, keyMessage, callback) => {
+                // Parse the clearkey license request.
+                let request = JSON.parse(new TextDecoder().decode(keyMessage));
+                // We only know one key, so there should only be one key ID.
+                // A real license server could easily serve multiple keys.
+                 
+                let keyObj = {
+                  kty: 'oct',
+                  alg: 'A128KW',
+                  kid: request.kids[0],
+                  k: toBase64(KEY)
+                };
+  
+                console.log('Key object:', keyObj);
+  
+                callback(null, new TextEncoder().encode(JSON.stringify({
+                  keys: [keyObj]
+                })));
+              }
+            }
+          }
+        });
         
                   
         //var streamy = fetch('https://cloud.comhem.se/opin/io/downloadPublic/jc000114826/e33bafef3d294eb29c5b14ddd5669195/@e33bafef3d294eb29c5b14ddd5669195', {mode: 'no-cors'});
