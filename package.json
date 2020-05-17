@@ -13,7 +13,8 @@
     "react-dom": "^16.13.1",
     "react-hls-player": "0.0.5",
     "react-player": "^1.15.3",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "simple-peer": "^9.7.2"
   },
   "scripts": {
     "start": "react-scripts start",

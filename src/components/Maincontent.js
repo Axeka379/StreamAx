@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import ReactPlayer from "react-player";
 import ReactHLS from "react-hls-player";
 import WsChat from "./wsChat";
+import PeerVoiceChat from './PeerVoiceChat'
 
 function Maincontent() {
   const [serverMessage, setMessage] = useState({ message: "Loading..." });
@@ -34,7 +35,7 @@ function Maincontent() {
               <video
                 src="https://jstrands.ddns.net:4000/videos"
                 type='video/x-matroska; codecs="theora, vorbis"'
-                autoplay
+                autoPlay
                 controls
               />
               <ReactPlayer
@@ -58,6 +59,7 @@ function Maincontent() {
               </div>
             </div>
             <WsChat />
+            <PeerVoiceChat />
           </main>
         );
       } else {

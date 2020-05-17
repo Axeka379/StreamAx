@@ -3,7 +3,7 @@ import { Input, Button } from "antd";
 let webS = new window.WebSocket("ws://localhost:4000");
 const WsChat = () => {
   const { Search } = Input;
-  const [chatArray, setChatMessage] = useState(["Welcome to the chat"]);
+  const [chatArray, setChatMessage] = useState([]);
   const testArray = ["testing1111"];
 
   webS.onopen = () => {
@@ -23,6 +23,19 @@ const WsChat = () => {
   };
   return (
     <div>
+      <h2
+        style={{
+          position: "absolute",
+          top: 130,
+          right: '15%',
+
+          color: "white",
+          textAlign: "start",
+          fontSize: "80%",
+        }}
+      >
+        YAHALLO CHAT
+      </h2>
       <div
         style={{
           width: 300,
@@ -30,7 +43,7 @@ const WsChat = () => {
           backgroundColor: "rgb(50,50,50)",
           position: "absolute",
           top: 200,
-          right: 400,
+          right: '8%',
           border: " 1px solid rgb(50,100,150)",
           overflow: "scroll",
           textAlign: "start",
@@ -42,7 +55,7 @@ const WsChat = () => {
         placeholder="Type something"
         onSearch={(value) => webS.send(value)}
         enterButton="Meow"
-        style={{ width: 300, position: "absolute", top: 800, right: 400 }}
+        style={{ width: 300, position: "absolute", top: 800,right: '8%' }}
       />
     </div>
   );
