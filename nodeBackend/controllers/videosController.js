@@ -4,7 +4,8 @@ const videoController = {};
 
 videoController.getVideos = async (req, res, next) => {
   console.log("get video");
-  const path = "/home/nnms/hdd0m/Lager/Cosmos.Possible.Worlds.S01E01.Ladder.to.the.Stars.REPACK.1080p.WEBRip.x264-CAFFEiNE/Cosmos.Possible.Worlds.S01E01.Ladder.to.the.Stars.REPACK.1080p.WEBRip.x264-CAFFEiNE.mkv"; // add own file
+  //const path = "/home/nnms/hdd0m/Lager/Adventure.Time.S01-10.COMPLETE.Plus.Extras.1080p.WEB-DL.BluRay.x264-MiXED/Adventure.Time.With.Finn.And.Jake.S02.1080p.BluRay.x264-DEiMOS/advtimes02e03.mp4"
+  const path = "/home/nnms/hdd1m/Tank/Rick.and.Morty.S04E10.1080p.WEBRip.x264-BTX/rick.and.morty.s04e10.1080p.webrip.x264-btx.mkv"
   const stat = fs.statSync(path);
   const fileSize = stat.size;
   const range = req.headers.range;

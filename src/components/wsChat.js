@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Input, Button } from "antd";
-let webS = new window.WebSocket("ws://localhost:4000");
+let webS = new window.WebSocket("wss://jstrands.ddns.net:4000");
 const WsChat = () => {
   const { Search } = Input;
   const [chatArray, setChatMessage] = useState(["Welcome to the chat"]);
@@ -30,7 +30,7 @@ const WsChat = () => {
           backgroundColor: "rgb(50,50,50)",
           position: "absolute",
           top: 200,
-          right: 400,
+          right: 50,
           border: " 1px solid rgb(50,100,150)",
           overflow: "scroll",
           textAlign: "start",
@@ -42,7 +42,7 @@ const WsChat = () => {
         placeholder="Type something"
         onSearch={(value) => webS.send(value)}
         enterButton="Meow"
-        style={{ width: 300, position: "absolute", top: 800, right: 400 }}
+        style={{ width: 300, position: "absolute", top: 800, right: 50 }}
       />
     </div>
   );

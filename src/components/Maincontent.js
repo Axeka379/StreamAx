@@ -32,18 +32,22 @@ function Maincontent() {
           <main>
             <div className="centerContentFlex">
               <video
-                src="https://jstrands.ddns.net:4000/videos"
-                type='video/x-matroska; codecs="theora, vorbis"'
-                autoplay
-                controls
+              src="https://jstrands.ddns.net:4000/videos"
+              type='video/x-matroska; codecs="theora, vorbis"'
+              autoPlay
+              controls
               />
               <ReactPlayer
                 //url="https://jstrands.ddns.net:4000/videos"
-                url="https://jstrands.ddns.net:5000/live/keymaster/index.m3u8"
+                //url = "https://jstrands.ddns.net:5000/live/keymaster/index.mpd"
+                //url = "rtmp://jstrands.ddns.net/live/keymaster"
+                //type='video/flv'
+                //type='video/x-matroska; codecs="theora, vorbis"'
+                autoPlay
                 playing
                 controls
               />
-              <Search
+                       <Search
                 placeholder="Type something"
                 onSearch={(value) =>
                   (document.querySelector(

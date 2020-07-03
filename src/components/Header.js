@@ -37,12 +37,12 @@ function Header() {
           </SubMenu>
           <Menu.Item key="alipay">
             <a
-              href="/"
+              href="https://docs.google.com/spreadsheets/d/18LaNCoRMwm37BO16f9Bz9Boj0vef-GnB2yJqb0bW80E/edit?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               style={{ color: "white" }}
             >
-              href
+              STONKS
             </a>
           </Menu.Item>
 

@@ -57,23 +57,36 @@ try {
     )
   );
 }
-const wss = new websocket.Server({ server });
-app.on("upgrade", wss.handleUpgrade);
+const wss = new websocket.Server({ server })
+app.on('upgrade', wss.handleUpgrade)
 
-let webSockUsers = [];
+let webSockUsers = []
 
 wss.broadcast = (data) => {
   wss.clients.forEach((client) => {
     if (client.readyState === websocket.OPEN) {
-      console.log(data);
-      client.send(data);
+      // console.log(data)
+      client.send(data)
     }
-  });
-};
+  })
+}
 
-wss.on("connection", function connection(ws) {
-  ws.on("message", function incoming(message) {
-    wss.broadcast(JSON.stringify({ message: message }));
-  });
-});
+wss.on('connection', function connection(ws) {
+  webSockUsers.push({
+    wsConnection: ws,
+    playerId: Math.round(Math.random() * 100),
+  })
+  // ws.send(
+  //   JSON.stringify({ message: 'your id is' + Math.round(Math.random() * 100) })
+  // )
 
+  ws.on('message', function incoming(message) {
+    wss.broadcast(message)
+    //saveNewMessage(message)
+    //console.log(message)
+  })
+  ws.on('close', function close() {
+    // console.log('disconnected')
+    //wss.broadcast(JSON.stringify({ message: "disconnected" }));
+  })
+})
