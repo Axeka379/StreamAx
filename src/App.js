@@ -3,43 +3,31 @@ import React from "react";
 import Header from "./components/Header";
 import Maincontent from "./components/Maincontent";
 import "./App.css";
-
-const defaultGlobalState = {
-  num: 0,
-  text: "foo",
-  bool: false,
-  isLoggedIn: false,
-};
-const globalStateContext = React.createContext(defaultGlobalState);
-const dispatchStateContext = React.createContext(undefined);
-
-export const GlobalStateProvider = ({ children }) => {
-  const [state, dispatch] = React.useReducer(
-    (state, newValue) => ({ ...state, ...newValue }),
-    defaultGlobalState
-  );
-  return (
-    <globalStateContext.Provider value={state}>
-      <dispatchStateContext.Provider value={dispatch}>
-        {children}
-      </dispatchStateContext.Provider>
-    </globalStateContext.Provider>
-  );
-};
-
-export const useGlobalState = () => [
-  React.useContext(globalStateContext),
-  React.useContext(dispatchStateContext),
-];
+import { Redirect, Route, Switch, useLocation } from "react-router-dom";
+import Yahallo from "./features/yahallo/Yahallo";
 
 function App() {
+  const location = useLocation();
+  const { pathname } = location;
+
   return (
-    <GlobalStateProvider>
-      <div className="App">
-        <Header />
-        <Maincontent />
-      </div>
-    </GlobalStateProvider>
+    <div className="App">
+      <Header />
+
+      <Switch>
+        <Redirect from="/:url*(/+)" to={pathname.slice(0, -1)} />
+
+        <Route exact path={"/"}>
+          <Maincontent />
+        </Route>
+
+        <Route exact path={"/yahallo"}>
+          <Yahallo />
+        </Route>
+
+        <Route render={() => <Redirect to="/" />} />
+      </Switch>
+    </div>
   );
 }
 

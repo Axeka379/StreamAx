@@ -4,7 +4,6 @@ let webS = new window.WebSocket("wss://jstrands.ddns.net:4000");
 const WsChat = () => {
   const { Search } = Input;
   const [chatArray, setChatMessage] = useState(["Welcome to the chat"]);
-  const testArray = ["testing1111"];
 
   webS.onopen = () => {
     console.log("connected!");
@@ -16,10 +15,12 @@ const WsChat = () => {
   webS.onmessage = (event) => {
     let data = JSON.parse(event.data);
 
-    setChatMessage((oldArray) => [
-      ...oldArray,
-      <p style={{ fontSize: 20 }}>{data.message}</p>,
-    ]);
+    if (data.message !== "ping") {
+      setChatMessage((oldArray) => [
+        ...oldArray,
+        <p style={{ fontSize: 20 }}>{data.message}</p>,
+      ]);
+    }
   };
   return (
     <div>
