@@ -40,7 +40,7 @@ const WsChat = () => {
       </div>
       <Search
         placeholder="Type something"
-        onSearch={(value) => webS.send(value)}
+        onSearch={(value) => webS.send(JSON.stringify({message: value}))}
         enterButton="Meow"
         style={{ width: 300, position: "absolute", top: 800, right: 50 }}
       />

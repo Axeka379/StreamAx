@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import ReactPlayer from "react-player";
 import ReactHLS from "react-hls-player";
 import WsChat from "./wsChat";
+import {ReactFlvPlayer} from 'react-flv-player'
 
 function Maincontent() {
   const [serverMessage, setMessage] = useState({ message: "Loading..." });
@@ -31,22 +32,13 @@ function Maincontent() {
         setContent(
           <main>
             <div className="centerContentFlex">
-              <video
-              src="https://jstrands.ddns.net:4000/videos"
-              type='video/x-matroska; codecs="theora, vorbis"'
-              autoPlay
-              controls
-              />
-              <ReactPlayer
-                //url="https://jstrands.ddns.net:4000/videos"
-                //url = "https://jstrands.ddns.net:5000/live/keymaster/index.mpd"
-                //url = "rtmp://jstrands.ddns.net/live/keymaster"
-                //type='video/flv'
-                //type='video/x-matroska; codecs="theora, vorbis"'
-                autoPlay
-                playing
-                controls
-              />
+            <ReactFlvPlayer
+          url = "https://jstrands.ddns.net:5000/live/keymaster.flv"
+          heigh = "800px"
+          width = "800px"
+          isMuted={true}
+        />
+        
                        <Search
                 placeholder="Type something"
                 onSearch={(value) =>
@@ -88,3 +80,21 @@ function Maincontent() {
   );
 }
 export default Maincontent;
+
+/*   <video
+src="https://jstrands.ddns.net:5000/live/keymaster.flv"
+autoPlay
+playing
+/>
+ 
+  <ReactPlayer
+   // url="https://jstrands.ddns.net:4000/videos"
+    url = "https://jstrands.ddns.net:5000/live/keymaster.m3u8"
+    //url = "rtmp://jstrands.ddns.net/live/keymaster"
+    type='video/flv'
+    type='video/x-matroska; codecs="theora, vorbis"'
+    autoPlay
+    playing
+    controls
+  />
+  */
